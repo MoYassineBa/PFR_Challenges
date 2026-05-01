@@ -17,7 +17,15 @@ Un objet est une **instance** d'une **classe** (le plan ou le moule).
 
 ### 1. Encapsulation
 
-Regrouper les donnees et les methodes qui les manipulent dans une seule classe, tout en **masquant les details internes** (modificateurs d'acces `private`, `protected`, `public`).
+**Definition**  
+L'encapsulation consiste a regrouper les donnees et les methodes qui les manipulent dans une seule classe, tout en **masquant les details internes** avec des modificateurs d'acces (`private`, `protected`, `public`).
+
+**Avantages**
+- Protege l'etat interne de l'objet contre les modifications directes
+- Permet de controler les regles metier via des methodes publiques
+- Rend le code plus sur et plus facile a maintenir
+
+**Code Example**
 
 ```java
 public class CompteBancaire {
@@ -40,13 +48,26 @@ public class CompteBancaire {
 }
 ```
 
+**Brief Code Explanation**  
+`solde` est `private`, donc il n'est pas modifiable directement depuis l'exterieur. On passe par des methodes (`deposer`, `getSolde`) qui appliquent des regles de validation.
+
 ### 2. Heritage
 
-Une classe (enfant) peut heriter des attributs et methodes d'une autre classe (parent). L'enfant peut :
+**Definition**  
+L'heritage permet a une classe enfant de recuperer les attributs et les methodes d'une classe parent.
+
+**Avantages**
+- Evite la duplication de code
+- Facilite la reutilisation des comportements communs
+- Permet d'etendre un modele existant proprement
+
+Une classe enfant peut :
 
 - utiliser les membres herites
 - redefinir (`override`) une methode
 - ajouter ses propres membres
+
+**Code Example**
 
 ```java
 class Animal {
@@ -62,11 +83,22 @@ class Chien extends Animal {
 }
 ```
 
+**Brief Code Explanation**  
+`Chien` herite de `Animal` avec `extends`. Il reutilise l'attribut `nom`, appelle le constructeur parent via `super(nom)`, et redefinit `parler()`.
+
 ### 3. Polymorphisme
 
-"Plusieurs formes" : la meme methode ou interface peut etre utilisee avec des objets de types differents.
+**Definition**  
+Le polymorphisme ("plusieurs formes") permet d'utiliser une meme reference ou methode pour manipuler differents types d'objets.
+
+**Avantages**
+- Rend le code plus flexible et extensible
+- Permet de coder contre des abstractions (parent/interface)
+- Reduit les `if/else` bases sur le type concret
 
 Polymorphisme d'execution (redefinition) :
+
+**Code Example**
 
 ```java
 Animal monAnimal = new Chien("Rex");
@@ -82,9 +114,21 @@ class Calculatrice {
 }
 ```
 
+**Brief Code Explanation**  
+Dans le premier exemple, la reference est de type `Animal`, mais la methode executee est celle de `Chien` (polymorphisme d'execution).  
+Dans le second, `add` existe avec plusieurs signatures (surcharge compilee).
+
 ### 4. Abstraction
 
-Cacher les details d'implementation et n'exposer que les fonctionnalites essentielles, via des classes abstraites ou des interfaces.
+**Definition**  
+L'abstraction consiste a cacher les details d'implementation et a exposer uniquement les fonctionnalites essentielles, via des classes abstraites ou des interfaces.
+
+**Avantages**
+- Clarifie les responsabilites de chaque composant
+- Force un contrat commun entre implementations
+- Simplifie l'evolution du code sans casser les usages
+
+**Code Example**
 
 ```java
 abstract class Forme {
@@ -95,6 +139,10 @@ interface Roulant {
     void avancer();   // contrat
 }
 ```
+
+**Brief Code Explanation**  
+`Forme` impose la methode `calculerAire()` sans definir son contenu.  
+`Roulant` definit un contrat (`avancer()`) que chaque classe concrete devra implementer.
 
 ---
 
